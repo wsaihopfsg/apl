@@ -17,7 +17,7 @@
   .container {
     position: relative;
     width: 800px;
-    height: 500px;
+    height: 400px;
   }
   svg {
     position: absolute;
@@ -60,7 +60,7 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease-out;
-    left: 480px; /* Moved slightly right to accommodate bigger animation */
+    left: 420px; /* Moved slightly right to accommodate bigger animation */
   }
   .text-block b {
     font-weight: bold;
@@ -71,7 +71,7 @@
 
 <div class="container">
   <svg viewBox="0 0 800 500">
-    <g transform="translate(250, 250)">
+    <g transform="translate(200, 200)">
       <g id="zone2-group">
         <circle id="zone2-circle" class="zone" r="180" fill="rgba(0, 99, 33, 0.6)" />
         <text class="zone-label" y="-140">Zone 2</text>
@@ -92,13 +92,13 @@
   </svg>
 
   <div class="text-container">
-    <div id="text0" class="text-block" style="top: 220px;">
+    <div id="text0" class="text-block" style="top: 170px;">
       <p>An area where an explosive atmosphere is present <b>continuously</b> or for long periods.</p>
     </div>
-    <div id="text1" class="text-block" style="top: 150px;">
+    <div id="text1" class="text-block" style="top: 100px;">
       <p>An area where an explosive atmosphere is <b>likely</b> to occur in normal operation occasionally.</p>
     </div>
-    <div id="text2" class="text-block" style="top: 90px;">
+    <div id="text2" class="text-block" style="top: 40px;">
       <p>An area where an explosive atmosphere is <b>unlikely</b> during normal operation, and if it occurs, it will persist for only a short period.</p>
     </div>
   </div>
