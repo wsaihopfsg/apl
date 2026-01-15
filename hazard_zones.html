@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #28323C; /* Dark blue-grey background */
+    background-color: #28323C;
     font-family: sans-serif;
   }
   .container {
@@ -26,22 +26,30 @@
     width: 100%;
     height: 100%;
   }
+  
+  /* --- CHANGED SECTION STARTS --- */
   .zone {
     transition: transform 0.3s ease-out;
     cursor: pointer;
-    transform-origin: center;
+    
+    /* These two lines fix the displacement issue: */
+    transform-box: fill-box; 
+    transform-origin: center; 
   }
-  /* Pop-up effect on hover */
+
   .zone:hover {
-    transform: scale(1.05);
+    /* Increased from 1.05 to 1.2 to make it appear bigger */
+    transform: scale(1.2); 
   }
+  /* --- CHANGED SECTION ENDS --- */
+
   .zone-label {
     font-size: 24px;
     font-weight: bold;
     fill: white;
     text-anchor: middle;
     dominant-baseline: middle;
-    pointer-events: none; /* Allows hover on the circle underneath */
+    pointer-events: none;
   }
   .text-block {
     position: absolute;
@@ -49,10 +57,10 @@
     font-size: 18px;
     line-height: 1.5;
     width: 350px;
-    visibility: hidden; /* Hidden by default */
+    visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease-out;
-    left: 450px;
+    left: 480px; /* Moved slightly right to accommodate bigger animation */
   }
   .text-block b {
     font-weight: bold;
@@ -77,9 +85,9 @@
         <text class="zone-label">Zone 0</text>
       </g>
       
-      <line id="line0" x1="65" y1="0" x2="200" y2="0" stroke="#FF9933" stroke-width="2" visibility="hidden" />
-      <line id="line1" x1="125" y1="-70" x2="200" y2="-70" stroke="#FF9933" stroke-width="2" visibility="hidden" />
-      <line id="line2" x1="185" y1="-130" x2="200" y2="-130" stroke="#FF9933" stroke-width="2" visibility="hidden" />
+      <line id="line0" x1="65" y1="0" x2="230" y2="0" stroke="#FF9933" stroke-width="2" visibility="hidden" />
+      <line id="line1" x1="125" y1="-70" x2="230" y2="-70" stroke="#FF9933" stroke-width="2" visibility="hidden" />
+      <line id="line2" x1="185" y1="-130" x2="230" y2="-130" stroke="#FF9933" stroke-width="2" visibility="hidden" />
     </g>
   </svg>
 
@@ -97,7 +105,6 @@
 </div>
 
 <script>
-  // JavaScript to handle showing/hiding lines and text blocks on hover
   const zones = [
     { circle: document.getElementById('zone0-circle'), line: document.getElementById('line0'), text: document.getElementById('text0') },
     { circle: document.getElementById('zone1-circle'), line: document.getElementById('line1'), text: document.getElementById('text1') },
