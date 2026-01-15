@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explosive Atmosphere Zones</title>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: transparent; /* Transparent as requested */
+    font-family: sans-serif;
+    overflow: hidden; /* Prevents scrollbars during resize */
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 800px; /* Limits max size but allows shrinking */
+    height: auto;
+    aspect-ratio: 2/1; /* Keeps the container proportional */
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  
+  .zone {
+    transition: transform 0.3s ease-out;
+    cursor: pointer;
+    transform-box: fill-box; 
+    transform-origin: center; 
+  }
+
+  .zone:hover {
+    transform: scale(1.1); 
+  }
+
+  .zone-label {
+    font-size: 24px;
+    font-weight: bold;
+    fill: white;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none;
+  }
+
+  /* Styling for the HTML text INSIDE the SVG */
+  .svg-text p {
+    color: white;
+    font-size: 18px;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .svg-text b {
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+    
+    <g transform="translate(100, 200)">
+      
+      <g id="zone2-group">
+        <circle id="zone2-circle" class="zone" r="180" fill="rgba(0, 99, 33, 0.6)" />
+        <text class="zone-label" y="-140">Zone 2</text>
+      </g>
+      <g id="zone1-group">
+        <circle id="zone1-circle" class="zone" r="120" fill="rgba(183, 12, 12, 0.7)" />
+        <text class="zone-label" y="-80">Zone 1</text>
+      </g>
+      <g id="zone0-group">
+        <circle id="zone0-circle" class="zone" r="60" fill="rgba(136, 133, 134, 0.8)" />
+        <text class="zone-label">Zone 0</text>
+      </g>
+      
+      <g id="popup0" visibility="hidden" opacity="0" style="transition: opacity 0.3s">
+        <line x1="65" y1="0" x2="230" y2="0" stroke="#FF9933" stroke-width="2" />
+        <foreignObject x="240" y="-40" width="350" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="svg-text">
+            <p>An area where an explosive atmosphere is present <b>continuously</b> or for long periods.</p>
+          </div>
+        </foreignObject>
+      </g>
+
+      <g id="popup1" visibility="hidden" opacity="0" style="transition: opacity 0.3s">
+        <line x1="110" y1="-70" x2="230" y2="-70" stroke="#FF9933" stroke-width="2" />
+        <foreignObject x="240" y="-110" width="350" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="svg-text">
+            <p>An area where an explosive atmosphere is <b>likely</b> to occur in normal operation occasionally.</p>
+          </div>
+        </foreignObject>
+      </g>
+
+      <g id="popup2" visibility="hidden" opacity="0" style="transition: opacity 0.3s">
+        <line x1="150" y1="-130" x2="230" y2="-130" stroke="#FF9933" stroke-width="2" />
+        <foreignObject x="240" y="-170" width="350" height="100">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="svg-text">
+            <p>An area where an explosive atmosphere is <b>unlikely</b> during normal operation, and if it occurs, it will persist for only a short period.</p>
+          </div>
+        </foreignObject>
+      </g>
+
+    </g>
+  </svg>
+</div>
+
+<script>
+  // Helper to manage hover effects
+  function setupHover(circleId, popupId) {
+    const circle = document.getElementById(circleId);
+    const popup = document.getElementById(popupId);
+
+    circle.addEventListener('mouseenter', () => {
+      popup.setAttribute('visibility', 'visible');
+      popup.style.opacity = '1';
+    });
+    circle.addEventListener('mouseleave', () => {
+      popup.setAttribute('visibility', 'hidden');
+      popup.style.opacity = '0';
+    });
+  }
+
+  setupHover('zone0-circle', 'popup0');
+  setupHover('zone1-circle', 'popup1');
+  setupHover('zone2-circle', 'popup2');
+</script>
+
+</body>
+</html>
