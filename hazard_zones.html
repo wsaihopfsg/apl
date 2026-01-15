@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explosive Atmosphere Zones</title>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #28323C; /* Dark blue-grey background */
+    font-family: sans-serif;
+  }
+  .container {
+    position: relative;
+    width: 800px;
+    height: 500px;
+  }
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .zone {
+    transition: transform 0.3s ease-out;
+    cursor: pointer;
+    transform-origin: center;
+  }
+  /* Pop-up effect on hover */
+  .zone:hover {
+    transform: scale(1.05);
+  }
+  .zone-label {
+    font-size: 24px;
+    font-weight: bold;
+    fill: white;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    pointer-events: none; /* Allows hover on the circle underneath */
+  }
+  .text-block {
+    position: absolute;
+    color: white;
+    font-size: 18px;
+    line-height: 1.5;
+    width: 350px;
+    visibility: hidden; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+    left: 450px;
+  }
+  .text-block b {
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <svg viewBox="0 0 800 500">
+    <g transform="translate(250, 250)">
+      <g id="zone2-group">
+        <circle id="zone2-circle" class="zone" r="180" fill="rgba(255, 204, 102, 0.6)" />
+        <text class="zone-label" y="-140">Zone 2</text>
+      </g>
+      <g id="zone1-group">
+        <circle id="zone1-circle" class="zone" r="120" fill="rgba(255, 153, 51, 0.7)" />
+        <text class="zone-label" y="-80">Zone 1</text>
+      </g>
+      <g id="zone0-group">
+        <circle id="zone0-circle" class="zone" r="60" fill="rgba(255, 102, 0, 0.8)" />
+        <text class="zone-label">Zone 0</text>
+      </g>
+      
+      <line id="line0" x1="65" y1="0" x2="200" y2="0" stroke="#FF9933" stroke-width="2" visibility="hidden" />
+      <line id="line1" x1="125" y1="-70" x2="200" y2="-70" stroke="#FF9933" stroke-width="2" visibility="hidden" />
+      <line id="line2" x1="185" y1="-130" x2="200" y2="-130" stroke="#FF9933" stroke-width="2" visibility="hidden" />
+    </g>
+  </svg>
+
+  <div class="text-container">
+    <div id="text0" class="text-block" style="top: 220px;">
+      <p>An area where an explosive atmosphere is present <b>continuously</b> or for long periods.</p>
+    </div>
+    <div id="text1" class="text-block" style="top: 150px;">
+      <p>An area where an explosive atmosphere is <b>likely</b> to occur in normal operation occasionally.</p>
+    </div>
+    <div id="text2" class="text-block" style="top: 90px;">
+      <p>An area where an explosive atmosphere is <b>unlikely</b> during normal operation, and if it occurs, it will persist for only a short period.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // JavaScript to handle showing/hiding lines and text blocks on hover
+  const zones = [
+    { circle: document.getElementById('zone0-circle'), line: document.getElementById('line0'), text: document.getElementById('text0') },
+    { circle: document.getElementById('zone1-circle'), line: document.getElementById('line1'), text: document.getElementById('text1') },
+    { circle: document.getElementById('zone2-circle'), line: document.getElementById('line2'), text: document.getElementById('text2') }
+  ];
+
+  zones.forEach(zone => {
+    zone.circle.addEventListener('mouseenter', () => {
+      zone.line.setAttribute('visibility', 'visible');
+      zone.text.style.visibility = 'visible';
+      zone.text.style.opacity = '1';
+    });
+    zone.circle.addEventListener('mouseleave', () => {
+      zone.line.setAttribute('visibility', 'hidden');
+      zone.text.style.visibility = 'hidden';
+      zone.text.style.opacity = '0';
+    });
+  });
+</script>
+
+</body>
+</html>
